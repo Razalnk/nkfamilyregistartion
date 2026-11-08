@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6e9">
+  <title>NK FAMILY Registration</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink:#293329; --muted:#687064; --green:#4e7449; --green-dark:#385b38;
+      --gold:#a18443; --cream:#f3eedf; --paper:#fffdf7; --line:#d9ddcf;
+      --error:#a33e36; --success:#3f704b; --shadow:0 14px 36px rgba(63,72,48,.11);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f6e9;color:var(--ink);font:17px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{width:100%;margin:0 auto;padding:18px 0 48px}
+    .photo-frame{width:min(calc(100% - 12px),560px);margin:0 auto 16px;padding:5px;border:3px solid #a9915b;border-radius:28px;background:#fffdf7;box-shadow:0 12px 32px rgba(71,76,48,.17);overflow:hidden}
+    .hero-image{display:block;width:100%;height:auto;border-radius:19px}
+    .brandbar{width:min(calc(100% - 28px),560px);margin:0 auto 13px;display:flex;align-items:center;gap:11px;color:var(--green-dark)}
+    .mark{width:42px;height:42px;flex:none;display:grid;place-items:center;border:1px solid #d9c78e;border-radius:14px;color:#fff;background:linear-gradient(145deg,#4e7449,#385b38);font-size:.95rem;font-weight:900;letter-spacing:-.04em;box-shadow:0 4px 12px rgba(56,91,56,.18)}
+    .brand-copy{display:grid;gap:1px;line-height:1.2}
+    .brand-name{color:var(--green-dark);font-size:.78rem;font-weight:850;letter-spacing:.13em}
+    .brand-caption{color:var(--ink);font-size:1.05rem;font-weight:800;letter-spacing:-.02em}
+    .intro{max-width:760px;margin:0 auto 20px;color:var(--muted);font-size:1.02rem}
+    .panel{width:min(100% - 28px,980px);margin:14px auto;padding:18px;border:1px solid var(--line);border-radius:22px;background:var(--paper);box-shadow:var(--shadow)}
+    .loading-panel{max-width:520px;margin:0 auto 22px}
+    h2{margin:0;font-size:1.42rem;letter-spacing:-.02em}
+    h3{margin:0;font-size:1.12rem}
+    .hint{margin:5px 0 14px;color:var(--muted);font-size:1rem}
+    .notice{margin:0 0 16px;padding:12px 14px;border-radius:12px;background:var(--cream);color:#5f4b24;font-size:1rem}
+    .section-heading{margin:10px 0 14px}
+    .branch-grid,.home-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .branch-heading{margin:0 0 14px;color:var(--ink);font-size:clamp(1.35rem,6vw,1.8rem);letter-spacing:-.025em}
+    .home-option-group{display:grid;gap:8px;min-width:0}
+    .home-nested-list{display:grid;grid-column:1/-1;gap:8px;margin-left:17px;padding:8px 0 0 12px;border-left:2px solid #d9c57f}
+    .nested-home-card{background:#f8faf7}
+    .main-home-badge{flex:none;padding:5px 9px;border:1px solid #e0c477;border-radius:999px;background:#fff5d9;color:#725514;font-size:.7rem;font-weight:850;letter-spacing:.045em;text-transform:uppercase}
+    .branch-card,.home-card{width:100%;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:17px;padding:12px 15px;background:#fffefa;color:var(--ink);font:inherit;text-align:left;cursor:pointer;box-shadow:0 4px 14px rgba(63,72,48,.08);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+    .branch-card{justify-content:flex-start;background:linear-gradient(130deg,#fffefa 10%,#f8f8ee 100%)}
+    .branch-card:hover,.branch-card:focus-visible,.home-card:hover,.home-card:focus-visible{border-color:var(--green);outline:3px solid rgba(78,116,73,.18);transform:translateY(-1px);box-shadow:0 9px 22px rgba(63,72,48,.15)}
+    .branch-number{flex:none;width:40px;height:40px;display:grid;place-items:center;border:1px solid transparent;border-radius:13px;font-size:1.05rem;font-weight:900;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+    .branch-label{flex:1;display:grid;gap:1px;font-size:1.08rem;font-weight:800}
+    .branch-name-en{line-height:1.25}
+    .branch-name-ml{color:var(--muted);font-size:.92rem;font-weight:600;line-height:1.25}
+    .home-name-pair{display:grid;gap:1px;min-width:0}
+    .home-name-en{font-weight:800;line-height:1.25}
+    .home-name-ml{color:var(--muted);font-size:.92rem;font-weight:600;line-height:1.25}
+    .branch-card .arrow{color:var(--green);font-size:1.25rem}
+    .home-card small{display:block;color:var(--muted);font-size:.84rem}
+    .home-status{flex:none;padding:4px 8px;border-radius:999px;background:#edf5ee;color:var(--green);font-size:.74rem;font-weight:800}
+    .selected-label{margin:8px 0 0;color:var(--green);font-weight:750}
+    .crumb{margin:0 0 10px;color:var(--green);font-weight:800}
+    .empty{padding:16px;border:1px dashed #afc0b6;border-radius:14px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:13px}
+    label{display:block;margin:0 0 5px;font-size:1rem;font-weight:750}
+    input,select{width:100%;min-height:54px;border:1px solid #c8cebd;border-radius:11px;padding:12px;background:#fff;color:var(--ink);font:inherit}
+    input:focus,select:focus{outline:3px solid rgba(31,92,79,.17);border-color:var(--green)}
+    .optional{color:var(--muted);font-weight:400}
+    .member-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:22px 0 10px}
+    .member-actions{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+    .member-card{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fbfcfa}
+    .member-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .member-title strong{font-size:.96rem}
+    .member-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .attendance-field-label{display:block;margin:0 0 5px;font-size:1rem;font-weight:750}
+    .attendance-options{display:flex;gap:8px}
+    .attendance-choice{flex:1;min-height:52px;display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid #c8cebd;border-radius:11px;background:#fff;color:var(--ink);font-size:1rem;font-weight:700;cursor:pointer}
+    .attendance-choice input{width:18px;min-height:18px;margin:0;padding:0;accent-color:var(--green)}
+    .age-group-hint{display:block;margin-top:4px;color:var(--muted);font-size:.88rem;font-weight:500}
+    .preview-age-group{padding:4px 8px;border-radius:999px;background:#edf0f4;color:#465b6b;font-size:.76rem;font-weight:750}
+    .person-section{min-width:0;padding:15px;border:1px solid var(--line);border-radius:17px;background:#fbfcfa}
+    .person-section h3{margin:0}
+    .person-section .hint{margin:4px 0 12px}
+    .people-columns{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
+    .person-entry-list{display:grid;gap:10px}
+    .person-entry{padding:12px;border:1px solid #e3eae5;border-radius:13px;background:#fff}
+    .family-editor{margin-top:10px}
+    .family-editor-toggle{width:100%;text-align:left}
+    .nested-family-panel{margin-top:10px;padding:12px;border:1px solid #d9e3dc;border-radius:13px;background:#f8faf7}
+    .nested-family-section+.nested-family-section{margin-top:12px}
+    .nested-family-section h4{margin:0 0 8px;font-size:.94rem}
+    .nested-family-panel .person-entry{margin-top:8px}
+    .section-add{width:100%;margin-top:10px}
+    .check-line{display:flex;align-items:center;gap:10px;min-height:48px;margin:10px 0;color:var(--muted);font-size:.95rem;font-weight:600}
+    .check-line input{width:22px;min-height:22px;margin:0;padding:0;border:0;accent-color:var(--green)}
+    .preview-card{margin-top:16px;padding:16px;border:1px solid #b9d4c7;border-radius:18px;background:linear-gradient(160deg,#f7fbf7,#fff)}
+    .preview-meta{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}
+    .preview-meta-item{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+    .preview-meta-item strong,.preview-meta-item span{display:block}
+    .preview-meta-item strong{font-size:.78rem;color:var(--muted)}
+    .preview-people{display:grid;gap:9px;margin-top:12px}
+    .preview-person{padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff}
+    .preview-person-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .preview-person-tags{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px}
+    .preview-role{padding:4px 8px;border-radius:999px;background:#edf5ee;color:var(--green);font-size:.76rem;font-weight:750}
+    .preview-attendance{padding:4px 8px;border-radius:999px;font-size:.76rem;font-weight:800}
+    .preview-attendance.present{background:#e7f2e8;color:#2f7040}
+    .preview-attendance.absent{background:#f8e9e5;color:#99453a}
+    .preview-person-details{margin:7px 0 0;color:var(--muted);font-size:.88rem}
+    .small-button,.secondary,.primary{min-height:52px;border-radius:12px;padding:11px 14px;font:inherit;font-weight:750;cursor:pointer}
+    .small-button,.secondary{border:1px solid #b9cbc0;background:#fff;color:var(--green)}
+    .small-button:hover,.secondary:hover{background:#eef5ef}
+    .remove-button{min-height:48px;padding:8px;border:0;background:transparent;color:#8b3731;font:inherit;font-weight:700;cursor:pointer}
+    .primary{border:0;background:var(--green);color:#fff}
+    .primary:hover{background:var(--green-dark)}
+    .primary:disabled{opacity:.6;cursor:wait}
+    .primary.full{width:100%;min-height:52px;margin-top:14px}
+    .button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .button-row>*{flex:1}
+    .consent{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;margin:18px 0 0;color:var(--muted);font-size:.9rem;font-weight:450}
+    .consent input{width:19px;min-height:19px;margin:2px 0 0;accent-color:var(--green)}
+    .status{min-height:26px;margin:12px 0 0;font-size:1rem;font-weight:700}
+    .status.error{color:var(--error)}
+    .status.success{color:var(--success)}
+    .footer{margin-top:20px;color:var(--muted);font-size:.9rem;text-align:center}
+    button:focus-visible{outline:3px solid rgba(31,92,79,.28);outline-offset:3px}
+    .loading{padding:10px 0;color:var(--muted)}
+    [hidden]{display:none!important}
+    @media(min-width:720px){
+      .panel{padding:25px}
+      .loading-panel{margin-top:28px}
+      .branch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .preview-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(min-width:860px){.member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(min-width:900px){.branch-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:440px){.member-head{align-items:start;flex-direction:column}.member-actions{justify-content:flex-start}.button-row{flex-direction:column}.panel{padding:15px}}
+    @media(max-width:620px){.photo-frame{width:calc(100% - 20px);max-width:560px;margin:0 auto 12px;padding:4px;border-radius:23px}.hero-image{border-radius:16px}.wrap.flow-started .photo-frame,.wrap.flow-started #photo-note{display:none!important}}
+    @media(max-width:620px){.photo-frame{width:calc(100% - 12px);max-width:560px;margin:0 auto 12px;padding:4px;border-radius:23px}.hero-image{border-radius:16px}.wrap.flow-started .photo-frame,.wrap.flow-started #photo-note{display:none!important}.panel{width:calc(100% - 20px);padding:16px}.people-columns,.member-grid,.preview-meta{grid-template-columns:minmax(0,1fr)}.person-section,.person-entry-list,.person-entry,.nested-family-panel,.member-card{width:100%;min-width:0}.attendance-options{gap:7px}.attendance-choice{min-width:0;padding:9px 8px}.branch-card,.home-card{min-height:64px;padding:11px 12px}.button-row>*{min-width:0}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+    .member-card,.person-section,.person-entry,.nested-family-panel,.preview-meta-item,.preview-person{background:#fffefa;color:var(--ink);border-color:var(--line)}
+    .member-grid>*,.people-columns>*{min-width:0}
+    .nested-home-card{background:#fffefa}
+    .preview-card{background:linear-gradient(160deg,#fbfcf4,#fffefa);border-color:#c6d1bd}
+    .main-home-badge{border-color:#e0d1a8;background:#fbf5e5;color:#725b25}
+    .home-status{background:#eaf2e5;color:#426b3f}
+    .notice{background:#f6f0df;color:#64552f;border:1px solid #e7d9b7}
+    .primary{background:#4e7449;color:#fff}
+    .primary:hover{background:#385b38}
+    input::placeholder{color:#697363;opacity:1}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="brandbar" aria-label="NK Family Registration">
+      <span class="mark" aria-hidden="true">NK</span>
+      <span class="brand-copy"><span class="brand-name">NK FAMILY</span><span class="brand-caption">Family Registration</span></span>
+    </header>
+    <div id="photo-frame" class="photo-frame" hidden>
+      <img id="hero-image" class="hero-image" alt="NK Family Meet 2026 poster">
+    </div>
+    <p id="photo-note" class="hint" hidden>The family photo is not set yet. The family coordinator can add it from the NK FAMILY menu.</p>
+    <section id="loading-panel" class="panel loading-panel" aria-labelledby="loading-heading" aria-live="polite">
+      <h2 id="loading-heading">Loading family registration</h2>
+      <p id="loading-status" class="hint">Please wait while the branches load.</p>
+      <button id="retry-load" class="primary full" type="button" hidden>Try again</button>
+    </section>
+
+    <section id="branch-panel" class="panel" hidden aria-label="Family branches">
+      <h2 class="branch-heading">Select your branch</h2>
+      <p class="hint">Choose your branch, then choose your home. No Google account or access code is needed.</p>
+      <div id="branch-grid" class="branch-grid"></div>
+      <p id="branch-status" class="status" role="status"></p>
+    </section>
+
+    <section id="home-panel" class="panel" hidden aria-labelledby="home-heading">
+      <p id="home-branch-crumb" class="crumb"></p>
+      <h2 id="home-heading">Choose your home</h2>
+      <div id="home-grid" class="home-grid"></div>
+      <div class="button-row">
+        <button id="back-branches" type="button" class="secondary">← Change branch</button>
+        <button id="request-home" type="button" class="primary">+ Request a separate home</button>
+      </div>
+    </section>
+
+    <section id="registration-panel" class="panel" hidden aria-labelledby="registration-heading">
+      <p id="registration-crumb" class="crumb"></p>
+      <h2 id="registration-heading">Register people for this home</h2>
+      <p id="registration-hint" class="hint"></p>
+      <p class="hint">Enter everyone in this household, including people who will be absent. Age group is separate from family relationship: choose Adult for adult sons or daughters, and Child for young children. Education, blood group, and attendance are required for everyone; only children may leave job and phone blank. Choose “Not known” if a blood group is unknown.</p>
+      <div id="existing-home-summary" class="notice" hidden></div>
+      <form id="registration-form" novalidate>
+        <div id="new-home-fields" class="grid two" hidden>
+          <div>
+            <label for="new-home-name">New home name</label>
+            <input id="new-home-name" maxlength="100" placeholder="For example, a descendant's home">
+          </div>
+          <div>
+            <label for="connects-through">Connected through which family member?</label>
+            <input id="connects-through" maxlength="100" placeholder="Enter the family member's name">
+          </div>
+          <div>
+            <label for="parent-home">Parent home <span class="optional">(optional)</span></label>
+            <select id="parent-home"></select>
+          </div>
+        </div>
+        <div class="grid two" style="margin-top:12px">
+          <div>
+            <label for="contact-phone">Household phone number <span class="optional">(optional)</span></label>
+            <input id="contact-phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="24">
+          </div>
+        </div>
+        <section class="person-section" aria-labelledby="head-section-title">
+          <h3 id="head-section-title">Household head / main adult</h3>
+          <p class="hint">Enter the person this home is listed under.</p>
+          <div id="head-entry"></div>
+        </section>
+        <div class="people-columns">
+          <section class="person-section" aria-labelledby="spouse-section-title">
+            <h3 id="spouse-section-title">Spouse details</h3>
+            <p class="hint">If adding a spouse, fill the required education, job, and phone fields. Date of birth is optional.</p>
+            <label class="check-line"><input id="no-spouse" type="checkbox"> No spouse to add</label>
+            <div id="spouse-entry"></div>
+          </section>
+          <section class="person-section" aria-labelledby="children-section-title">
+            <h3 id="children-section-title">Children and descendants</h3>
+          <p class="hint">A child relationship may describe an adult or a young child. Choose the age group separately; only people marked Child may leave job and phone blank. Every child has an option to enter their spouse and children too.</p>
+            <div id="children-list" class="person-entry-list"></div>
+            <button id="add-child" type="button" class="small-button section-add">+ Add another child / descendant</button>
+          </section>
+        </div>
+        <section class="person-section" style="margin-top:12px" aria-labelledby="other-section-title">
+          <h3 id="other-section-title">Other people in this home <span class="optional">(optional)</span></h3>
+          <p class="hint">Add parents, siblings, or other relatives who live with this household.</p>
+          <div id="other-list" class="person-entry-list"></div>
+          <button id="add-other" type="button" class="small-button section-add">+ Add another person</button>
+        </section>
+        <section id="registration-preview" class="preview-card" hidden aria-labelledby="preview-title" aria-live="polite">
+          <h3 id="preview-title">Review your registration</h3>
+          <p class="hint">Check the details below before sending them to the family coordinator.</p>
+          <div id="preview-content"></div>
+          <label class="consent">
+            <input id="consent" type="checkbox" required>
+            <span>I am allowed to submit these people’s details. They know the family coordinator will store them in a private Google Sheet.</span>
+          </label>
+          <div class="button-row">
+            <button id="edit-registration" type="button" class="secondary">Edit details</button>
+            <button id="submit-button" type="submit" class="primary" hidden>Confirm and send for review</button>
+          </div>
+        </section>
+        <div class="button-row">
+          <button id="back-homes" type="button" class="secondary">← Choose another home</button>
+          <button id="preview-button" type="button" class="primary">Preview registration</button>
+        </div>
+        <p id="form-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <p class="footer">NK FAMILY · Household registration</p>
+  </main>
+
+  <script>
+    var selectedBranch = null;
+    var selectedHome = null;
+    var config = null;
+    var currentRequestKey = makeRequestKey();
+    var maxMembers = 30;
+    var isNewHousehold = false;
+    var previewReady = false;
+    var englishBranchNames = {
+      B01: "Marakkar",
+      B02: "Abubacker",
+      B03: "Fathima",
+      B04: "Jameela",
+      B05: "Ahammed Kutty",
+      B06: "Abdul Majeed",
+      B07: "Hamza",
+      B08: "Ruqayya",
+      B09: "Abdul Saleem",
+      B10: "Abdul Gafoor",
+      B11: "Mohammed Ashraf"
+    };
+    var englishHomeNames = {
+      "H-B01-MAIN":"Marakkar", "H-B01-IBRAHIM":"Ibrahim",
+      "H-B01-MUHAMMED-ALI":"Muhammed Ali", "H-B01-FAROOQ":"Farooq",
+      "H-B01-SHAREEFA":"Shareefa", "H-B01-SAHLA":"Sahla", "H-B01-NAHLA":"Nahla",
+      "H-B02-MAIN":"Abubacker", "H-B02-RAIHANA":"Raihana",
+      "H-B02-MUHAMMED-HASSAN":"Muhammed Hassan", "H-B02-HAFSATH":"Hafsath",
+      "H-B02-ARIFA":"Arifa", "H-B02-FAREEDA":"Fareeda",
+      "H-B03-MAIN":"Fathima", "H-B03-RAMLA":"Ramla", "H-B03-SALAM":"Salam",
+      "H-B03-RUQAYYA":"Ruqayya", "H-B03-FARISHA":"Farisha",
+      "H-B03-SHARAFUNNISA":"Sharafunnisa", "H-B04-MAIN":"Jameela",
+      "H-B04-SALEEM":"Abdul Saleem", "H-B04-SAREENA":"Sareena", "H-B04-SAFEEDA":"Safeeda",
+      "H-B05-MAIN":"Ahammed Kutty", "H-B05-RAIHANA":"Raihana",
+      "H-B05-UMARALI-AKBAR":"Umarali Akbar", "H-B06-MAIN":"Abdul Majeed",
+      "H-B06-HABIBA":"Habiba", "H-B06-HASANA":"Hasana", "H-B07-MAIN":"Hamza",
+      "H-B07-HUSNA":"Husna", "H-B08-MAIN":"Ruqayya", "H-B08-SUHARA-BEEVI":"Suhara Beevi",
+      "H-B08-HAJARA":"Hajara", "H-B09-MAIN":"Abdul Saleem",
+      "H-B09-FATHIMA-HUDHA":"Fathima Hudha", "H-B10-MAIN":"Abdul Gafoor",
+      "H-B11-MAIN":"Mohammed Ashraf"
+    };
+
+    function branchNameInEnglish(branch) {
+      return englishBranchNames[branch.id] || branch.label;
+    }
+    function homeNameInEnglish(home) {
+      return englishHomeNames[home.id] || home.name;
+    }
+    function homeHeadNameInEnglish(home) {
+      return englishHomeNames[home.id] || home.headName || home.name || "";
+    }
+    function pushFlowHistory(page) {
+      window.history.pushState({ nkFamilyRegistrationPage: page }, "", window.location.href);
+    }
+    function showFlowPage(page) {
+      var branchPanel = document.getElementById("branch-panel");
+      var homePanel = document.getElementById("home-panel");
+      var registrationPanel = document.getElementById("registration-panel");
+      if (page === "registration" && selectedBranch) {
+        branchPanel.hidden = true;
+        homePanel.hidden = true;
+        registrationPanel.hidden = false;
+        document.querySelector(".wrap").classList.add("flow-started");
+        registrationPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (page === "home" && selectedBranch) {
+        branchPanel.hidden = true;
+        registrationPanel.hidden = true;
+        renderHomes();
+        homePanel.hidden = false;
+        document.querySelector(".wrap").classList.add("flow-started");
+        homePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      homePanel.hidden = true;
+      registrationPanel.hidden = true;
+      branchPanel.hidden = false;
+      document.querySelector(".wrap").classList.remove("flow-started");
+      branchPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    window.history.replaceState({ nkFamilyRegistrationPage: "branch" }, "", window.location.href);
+    window.addEventListener("popstate", function (event) {
+      showFlowPage(event.state && event.state.nkFamilyRegistrationPage || "branch");
+    });
+    function makeBilingualHomeLabel(home) {
+      var pair = document.createElement("span");
+      pair.className = "home-name-pair";
+      var englishName = englishHomeNames[home.id];
+      if (englishName && englishName !== home.name) {
+        var english = document.createElement("span");
+        english.className = "home-name-en";
+        english.textContent = englishName;
+        pair.appendChild(english);
+      }
+      var malayalam = document.createElement("span");
+      malayalam.className = "home-name-ml";
+      malayalam.lang = "ml";
+      malayalam.textContent = home.name;
+      pair.appendChild(malayalam);
+      return pair;
+    }
+
+    function makeRequestKey() {
+      if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+      return "nk_" + Date.now().toString(36) + "_" +
+        Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    }
+    function setStatus(id, message, kind) {
+      var element = document.getElementById(id);
+      element.textContent = message || "";
+      element.className = "status" + (kind ? " " + kind : "");
+    }
+    function hasAppsScriptBridge() {
+      return typeof google !== "undefined" && google.script && google.script.run;
+    }
+    function getNetlifyApiUrl(api) {
+      var host = String(window.location.hostname || "").toLowerCase();
+      var base = host === "nkfamilyregistration.netlify.app" || host.endsWith(".netlify.app")
+        ? "/.netlify/functions/nk-registration"
+        : "https://nkfamilyregistration.netlify.app/.netlify/functions/nk-registration";
+      return base + "?api=" + encodeURIComponent(api);
+    }
+    function callRegistrationServer(method, payload, onSuccess, onFailure) {
+      if (hasAppsScriptBridge()) {
+        var runner = google.script.run
+          .withSuccessHandler(onSuccess)
+          .withFailureHandler(onFailure);
+        if (method === "getPublicConfig") runner.getPublicConfig();
+        else runner.submitRegistration(payload);
+        return;
+      }
+
+      var isConfig = method === "getPublicConfig";
+      fetch(getNetlifyApiUrl(isConfig ? "config" : "submit"), {
+        method: isConfig ? "GET" : "POST",
+        headers: isConfig ? {} : { "Content-Type": "application/json" },
+        body: isConfig ? undefined : JSON.stringify(payload),
+        cache: "no-store"
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Registration service returned an error.");
+          return response.json();
+        })
+        .then(onSuccess)
+        .catch(onFailure);
+    }
+    function escapeHtml(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, function (c) {
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+      });
+    }
+    function loadRegistration() {
+      var button = document.getElementById("retry-load");
+      button.disabled = true;
+      button.hidden = true;
+      setStatus("loading-status", "Loading family branches…");
+      callRegistrationServer("getPublicConfig", null, function (result) {
+          button.disabled = false;
+          button.textContent = "Try again";
+          if (!result || !result.ok || !result.ready) {
+            setStatus("loading-status", result && result.message ? result.message : "Registration is not ready yet. Contact the family coordinator.", "error");
+            button.hidden = false;
+            return;
+          }
+          config = result;
+          if (result.motherPhotoDataUri) {
+            document.getElementById("hero-image").src = result.motherPhotoDataUri;
+            document.getElementById("photo-frame").hidden = false;
+          } else if (!hasAppsScriptBridge()) {
+            document.getElementById("hero-image").src = "nk-family-meet-2026-poster.png";
+            document.getElementById("photo-frame").hidden = false;
+          } else {
+            document.getElementById("photo-note").hidden = false;
+          }
+          renderBranches();
+          document.getElementById("loading-panel").hidden = true;
+          document.getElementById("branch-panel").hidden = false;
+        }, function () {
+          button.disabled = false;
+          button.textContent = "Try again";
+          button.hidden = false;
+          setStatus("loading-status", "Could not load registration. Check your connection and try again.", "error");
+        });
+    }
+    function renderBranches() {
+      var grid = document.getElementById("branch-grid");
+      grid.replaceChildren();
+      var branchPalette = [
+        ["#e4f2e9","#216044"],["#e8efff","#4059a8"],["#fff0e5","#a65327"],
+        ["#f7eafa","#89469a"],["#e2f4f3","#167875"],["#fff4d8","#916617"],
+        ["#e9f0f7","#3d6282"],["#ffe8ec","#a3435a"],["#edf4dc","#5b7628"],
+        ["#efe9ff","#6145a5"],["#e8f5f5","#28777e"]
+      ];
+      (config.branches || []).forEach(function (branch, index) {
+        var branchNumber = Number(String(branch.id || "").replace(/^B/, "")) || index + 1;
+        var paletteIndex = (branchNumber - 1) % branchPalette.length;
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "branch-card";
+        var englishName = branchNameInEnglish(branch);
+        button.setAttribute("aria-label", branchNumber + ". " + englishName + " (" + branch.label + ")");
+        var number = document.createElement("span");
+        number.className = "branch-number";
+        number.textContent = String(branchNumber);
+        number.style.backgroundColor = branchPalette[paletteIndex][0];
+        number.style.color = branchPalette[paletteIndex][1];
+        number.style.borderColor = branchPalette[paletteIndex][0];
+        var label = document.createElement("span");
+        label.className = "branch-label";
+        var englishLabel = document.createElement("span");
+        englishLabel.className = "branch-name-en";
+        englishLabel.textContent = englishName;
+        var malayalamLabel = document.createElement("span");
+        malayalamLabel.className = "branch-name-ml";
+        malayalamLabel.lang = "ml";
+        malayalamLabel.textContent = branch.label;
+        label.append(englishLabel, malayalamLabel);
+        var arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "›";
+        button.append(number, label, arrow);
+        button.addEventListener("click", function () { chooseBranch(branch); });
+        grid.appendChild(button);
+      });
+      if (!(config.branches || []).length) setStatus("branch-status", "No active branches are configured. Contact the family coordinator.", "error");
+    }
+    function chooseBranch(branch) {
+      pushFlowHistory("home");
+      selectedBranch = branch;
+      selectedHome = null;
+      document.querySelector(".wrap").classList.add("flow-started");
+      document.getElementById("branch-panel").hidden = true;
+      document.getElementById("registration-panel").hidden = true;
+      renderHomes();
+      document.getElementById("home-panel").hidden = false;
+      document.getElementById("home-panel").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function renderHomes() {
+      var crumb = document.getElementById("home-branch-crumb");
+      crumb.textContent = branchNameInEnglish(selectedBranch);
+      var grid = document.getElementById("home-grid");
+      grid.replaceChildren();
+      var homes = (config.homes || []).filter(function (home) {
+        return home.branchId === selectedBranch.id;
+      });
+      function isNestedHome(home) {
+        return home.isNested === true;
+      }
+      function appendHomeOption(home, host, nested) {
+        var group = document.createElement("div");
+        group.className = "home-option-group";
+        var card = document.createElement("button");
+        card.type = "button";
+        card.className = "home-card" + (nested ? " nested-home-card" : "");
+        var details = document.createElement("span");
+        details.appendChild(makeBilingualHomeLabel(home));
+        card.append(details);
+        if (/-MAIN$/.test(home.id || "")) {
+          var mainBadge = document.createElement("span");
+          mainBadge.className = "main-home-badge";
+          mainBadge.textContent = "Main House";
+          card.appendChild(mainBadge);
+        }
+        var arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "›";
+        card.appendChild(arrow);
+        card.addEventListener("click", function () { selectHome(home); });
+        group.appendChild(card);
+        var children = homes.filter(function (candidate) {
+          return candidate.parentHouseholdId === home.id && isNestedHome(candidate);
+        });
+        if (children.length) {
+          var nestedList = document.createElement("div");
+          nestedList.className = "home-nested-list";
+          children.forEach(function (child) { appendHomeOption(child, nestedList, true); });
+          group.appendChild(nestedList);
+        }
+        host.appendChild(group);
+      }
+      homes.filter(function (home) { return !isNestedHome(home); }).forEach(function (home) {
+        appendHomeOption(home, grid, false);
+      });
+      if (!homes.length) {
+        var empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "There are no open homes in this branch yet. Request a separate home, or ask the family coordinator to add the correct home.";
+        grid.appendChild(empty);
+      }
+    }
+    function selectHome(home) {
+      pushFlowHistory("registration");
+      isNewHousehold = false;
+      selectedHome = home;
+      showRegistrationForm();
+    }
+    function requestNewHome() {
+      pushFlowHistory("registration");
+      isNewHousehold = true;
+      selectedHome = null;
+      showRegistrationForm();
+    }
+    function showRegistrationForm() {
+      var panel = document.getElementById("registration-panel");
+      var newFields = document.getElementById("new-home-fields");
+      var existingSummary = document.getElementById("existing-home-summary");
+      var presetChildren = !isNewHousehold && config.familyPresets ? config.familyPresets[selectedHome.id] : null;
+      var homeName = isNewHousehold ? "New separate home request" : homeNameInEnglish(selectedHome);
+      document.getElementById("registration-crumb").textContent =
+        branchNameInEnglish(selectedBranch) + " › " + homeName;
+      document.getElementById("registration-hint").textContent = isNewHousehold
+        ? "Enter the household head, spouse, children, and anyone else living together in this new home. A coordinator reviews new home requests."
+        : "";
+      newFields.hidden = !isNewHousehold;
+      existingSummary.hidden = true;
+      existingSummary.textContent = "";
+      document.getElementById("new-home-name").required = isNewHousehold;
+      document.getElementById("connects-through").required = isNewHousehold;
+      document.getElementById("contact-phone").value = "";
+      if (isNewHousehold) {
+        document.getElementById("new-home-name").value = "";
+        document.getElementById("connects-through").value = "";
+        populateParentHomes();
+      }
+      document.getElementById("contact-phone").value = "";
+      document.getElementById("consent").checked = false;
+      setStatus("form-status", "");
+      resetRegistrationPreview();
+      document.getElementById("no-spouse").checked = false;
+      document.getElementById("spouse-entry").hidden = false;
+      document.getElementById("other-list").replaceChildren();
+      document.getElementById("children-list").replaceChildren();
+      document.getElementById("head-entry").replaceChildren(
+        makePersonRow("head", isNewHousehold ? "" : homeHeadNameInEnglish(selectedHome))
+      );
+      document.getElementById("spouse-entry").replaceChildren(makePersonRow("spouse", ""));
+      if (Array.isArray(presetChildren) && presetChildren.length) {
+        presetChildren.forEach(function (preset) {
+          document.getElementById("children-list").appendChild(
+            makePersonRow("child", preset.name || "", "Child", preset.family)
+          );
+        });
+        renumberPersonRows();
+      } else {
+        addChildRow();
+      }
+      document.getElementById("home-panel").hidden = true;
+      panel.hidden = false;
+      panel.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function populateParentHomes() {
+      var select = document.getElementById("parent-home");
+      select.replaceChildren();
+      addOption(select, "", "No parent home selected");
+      (config.parentHomes || config.homes || []).filter(function (home) {
+        return home.branchId === selectedBranch.id;
+      }).forEach(function (home) {
+        addOption(select, home.id, homeNameInEnglish(home));
+      });
+      select.onchange = function () {
+        var parentList = config.parentHomes || config.homes || [];
+        var parent = parentList.find(function (home) { return home.id === select.value; });
+        if (parent && !document.getElementById("connects-through").value.trim()) {
+          document.getElementById("connects-through").value = homeHeadNameInEnglish(parent) || parent.connectedThrough;
+        }
+      };
+    }
+    function makePersonRow(type, prefillName, defaultRelationship, familyOptions) {
+      var card = document.createElement("div");
+      card.className = "person-entry";
+      card.setAttribute("data-person-type", type);
+      card.setAttribute("data-client-key", makeRequestKey());
+      var titleRow = document.createElement("div");
+      titleRow.className = "member-title";
+      var title = document.createElement("strong");
+      title.textContent = type === "head" ? "Main adult" : type === "spouse" ? "Spouse" : type === "child" ? "Child / descendant" : "Other household member";
+      titleRow.appendChild(title);
+      if (type === "child" || type === "other") {
+        var remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", function () { card.remove(); renumberPersonRows(); renumberAllNestedChildren(); invalidateRegistrationPreview(); });
+        titleRow.appendChild(remove);
+      }
+      card.appendChild(titleRow);
+
+      var fields = document.createElement("div");
+      fields.className = "member-grid";
+      fields.appendChild(makeTextField("Full name", "member-name", prefillName || "", type === "head", "Person's full name"));
+      fields.appendChild(makeAgeGroupField(card, type, prefillName || ""));
+      fields.appendChild(makeAttendanceField(card.getAttribute("data-client-key")));
+
+      if (type === "child" || type === "other") {
+        var relation = document.createElement("select");
+        relation.className = "member-relationship";
+        var defaultValue = defaultRelationship || (type === "child" ? "Child" : "Other relative");
+        ["Child","Grandchild","Descendant","Spouse","Parent","Sibling","Grandparent","Other relative"].forEach(function (item) {
+          addOption(relation, item, item);
+        });
+        relation.value = defaultValue;
+        fields.appendChild(makeSelectField("Relationship", relation));
+      }
+      fields.appendChild(makeRequiredMemberField(makeTextField("Education / qualification *", "member-education", "", false, "e.g. B.Com or Class 12")));
+      fields.appendChild(makeTextField("Occupation / job *", "member-occupation", "", false, "e.g. teacher or homemaker"));
+      fields.appendChild(makePhoneField("Phone number *", "member-phone", "Enter phone number"));
+      fields.appendChild(makeBloodGroupField());
+      var dateOfBirth = document.createElement("input");
+      dateOfBirth.type = "date";
+      dateOfBirth.className = "member-dob";
+      dateOfBirth.max = localDateInputToday();
+      fields.appendChild(makeControlField("Date of birth (optional)", dateOfBirth));
+      card.appendChild(fields);
+      card.querySelector(".member-name").addEventListener("input", function () {
+        syncAgeGroupForName(card, type, this.value);
+      });
+      updateAgeDependentFields(card);
+      if (type === "child") attachFamilyEditor(card, familyOptions);
+      return card;
+    }
+    var adultPresetNames = ["Aboobacker", "Fasil", "Saleem NK", "Thaha NK", "Rafi NK", "Shibili NK", "Shibili Habeeb", "Muhammed Saqid NK", "Muhammed Sadiq NK", "Shakir NK", "Jamal Rasheed", "Jamal", "Rasheed", "Muhammed Rafi", "Fahis NK", "Khadeeja Nasrin"];
+    function normalizePresetName(value) { return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, ""); }
+    function isAdultPresetName(value) {
+      var normalized = normalizePresetName(value);
+      return adultPresetNames.some(function (name) { return normalizePresetName(name) === normalized; });
+    }
+    function makeAgeGroupField(card, type, prefillName) {
+      var select = document.createElement("select");
+      select.className = "member-age-group";
+      select.required = true;
+      select.setAttribute("aria-required", "true");
+      addOption(select, "", "Choose age group");
+      addOption(select, "Adult", "Adult");
+      addOption(select, "Child", "Child");
+      select.dataset.presetAdult = String(isAdultPresetName(prefillName));
+      if (isAdultPresetName(prefillName) || type === "head" || type === "spouse") select.value = "Adult";
+      else if (type === "child") select.value = "Child";
+      select.disabled = isAdultPresetName(prefillName);
+      select.addEventListener("change", function () { updateAgeDependentFields(card); invalidateRegistrationPreview(); });
+      var field = makeSelectField("Age group *", select);
+      var hint = document.createElement("small");
+      hint.className = "age-group-hint";
+      hint.textContent = isAdultPresetName(prefillName) ? "Preset adult; job and phone are required." : "Choose by age, separately from family relationship.";
+      field.appendChild(hint);
+      return field;
+    }
+    function syncAgeGroupForName(card, type, name) {
+      var select = card.querySelector(".member-age-group");
+      var wasPresetAdult = select.dataset.presetAdult === "true";
+      var isPresetAdult = isAdultPresetName(name);
+      if (isPresetAdult) {
+        select.value = "Adult";
+        select.disabled = true;
+        select.dataset.presetAdult = "true";
+      } else if (wasPresetAdult) {
+        select.disabled = false;
+        select.dataset.presetAdult = "false";
+        select.value = type === "head" || type === "spouse" ? "Adult" : type === "child" ? "Child" : "";
+      }
+      updateAgeDependentFields(card);
+    }
+    function updateAgeDependentFields(card) {
+      var isChild = card.querySelector(".member-age-group").value === "Child";
+      var occupation = card.querySelector(".member-occupation");
+      var phone = card.querySelector(".member-phone");
+      occupation.closest("label").firstChild.nodeValue = isChild ? "Occupation / job (optional)" : "Occupation / job *";
+      phone.closest("label").firstChild.nodeValue = isChild ? "Phone number (optional)" : "Phone number *";
+      occupation.setAttribute("aria-required", String(!isChild));
+      phone.setAttribute("aria-required", String(!isChild));
+      occupation.placeholder = isChild ? "Leave blank if none" : "e.g. teacher or homemaker";
+      phone.placeholder = isChild ? "Leave blank if none" : "Enter phone number";
+    }
+    function makeAttendanceField(clientKey) {
+      var field = document.createElement("div");
+      field.className = "field attendance-field";
+      var label = document.createElement("div");
+      label.className = "attendance-field-label";
+      label.textContent = "Program attendance *";
+      var options = document.createElement("div");
+      options.className = "attendance-options";
+      options.setAttribute("role", "radiogroup");
+      options.setAttribute("aria-label", "Program attendance");
+      ["Present", "Absent"].forEach(function (status) {
+        var choice = document.createElement("label");
+        choice.className = "attendance-choice";
+        var radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "attendance-" + clientKey;
+        radio.className = "member-attendance";
+        radio.value = status;
+        radio.setAttribute("aria-required", "true");
+        choice.appendChild(radio);
+        choice.appendChild(document.createTextNode(status));
+        options.appendChild(choice);
+      });
+      field.appendChild(label);
+      field.appendChild(options);
+      return field;
+    }
+    function makeBloodGroupField() {
+      var select = document.createElement("select");
+      select.className = "member-blood-group";
+      select.required = true;
+      select.setAttribute("aria-required", "true");
+      addOption(select, "", "Select blood group");
+      ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Not known"].forEach(function (group) {
+        addOption(select, group, group);
+      });
+      return makeSelectField("Blood group *", select);
+    }
+    function clearPersonInputs(container) {
+      container.querySelectorAll("input").forEach(function (input) {
+        if (input.type === "radio" || input.type === "checkbox") input.checked = false;
+        else input.value = "";
+      });
+      container.querySelectorAll(".member-blood-group").forEach(function (select) { select.value = ""; });
+    }
+    function makeRequiredMemberField(field) {
+      var input = field.querySelector("input");
+      input.setAttribute("aria-required", "true");
+      return field;
+    }
+    function attachFamilyEditor(childCard, familyOptions) {
+      var options = familyOptions || { spouse: true, children: true };
+      if (options.spouse === false && options.children === false) return;
+      var editor = document.createElement("div");
+      editor.className = "family-editor";
+      var optionLabel = options.spouse === false ? "children" : options.children === false ? "spouse" : "spouse and children";
+      var toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "small-button family-editor-toggle";
+      toggle.textContent = "+ Add " + optionLabel;
+      toggle.setAttribute("aria-expanded", "false");
+      var panel = document.createElement("div");
+      panel.className = "nested-family-panel";
+      panel.hidden = true;
+      toggle.addEventListener("click", function () {
+        if (!panel.dataset.ready) buildNestedFamilyEditor(childCard, panel, options);
+        panel.hidden = !panel.hidden;
+        toggle.setAttribute("aria-expanded", String(!panel.hidden));
+        toggle.textContent = panel.hidden ? "+ Add " + optionLabel : "Hide " + optionLabel;
+        invalidateRegistrationPreview();
+      });
+      editor.append(toggle, panel);
+      childCard.appendChild(editor);
+      if (options.open) {
+        buildNestedFamilyEditor(childCard, panel, options);
+        panel.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.textContent = "Hide " + optionLabel;
+      }
+    }
+    function buildNestedFamilyEditor(parentCard, panel, familyOptions) {
+      var options = familyOptions || { spouse: true, children: true };
+      panel.dataset.ready = "true";
+      if (options.spouse !== false) {
+      var spouseSection = document.createElement("section");
+      spouseSection.className = "nested-family-section";
+      var spouseHeading = document.createElement("h4");
+      spouseHeading.textContent = "Spouse details (optional)";
+      spouseSection.appendChild(spouseHeading);
+      var noSpouseLabel = document.createElement("label");
+      noSpouseLabel.className = "check-line";
+      var noSpouse = document.createElement("input");
+      noSpouse.type = "checkbox";
+      noSpouse.className = "nested-no-spouse";
+      noSpouseLabel.append(noSpouse, document.createTextNode(" No spouse to add"));
+      spouseSection.appendChild(noSpouseLabel);
+      var spouseEntry = document.createElement("div");
+      spouseEntry.className = "nested-spouse-entry";
+      spouseEntry.appendChild(makePersonRow("spouse", ""));
+      noSpouse.addEventListener("change", function () {
+        spouseEntry.hidden = noSpouse.checked;
+        if (noSpouse.checked) clearPersonInputs(spouseEntry);
+        invalidateRegistrationPreview();
+      });
+      spouseSection.appendChild(spouseEntry);
+      panel.appendChild(spouseSection);
+      }
+
+      if (options.children !== false) {
+      var childrenSection = document.createElement("section");
+      childrenSection.className = "nested-family-section";
+      var childrenHeading = document.createElement("h4");
+      childrenHeading.textContent = "Children and descendants";
+      var childrenList = document.createElement("div");
+      childrenList.className = "nested-children-list person-entry-list";
+      var addChild = document.createElement("button");
+      addChild.type = "button";
+      addChild.className = "small-button section-add add-nested-child";
+      addChild.textContent = "+ Add a child";
+      addChild.addEventListener("click", function () {
+        if (!canAddPersonRow()) return;
+        var relation = parentCard.querySelector(".member-relationship").value;
+        var nextRelation = relation === "Child" ? "Grandchild" : "Descendant";
+        childrenList.appendChild(makePersonRow("child", "", nextRelation));
+        renumberNestedChildren(childrenList);
+        invalidateRegistrationPreview();
+      });
+      childrenSection.append(childrenHeading, childrenList, addChild);
+      panel.appendChild(childrenSection);
+      if (options.open) {
+        var relationControl = parentCard.querySelector(".member-relationship");
+        var firstChildRelation = relationControl && relationControl.value === "Child" ? "Grandchild" : "Descendant";
+        childrenList.appendChild(makePersonRow("child", "", firstChildRelation));
+        renumberNestedChildren(childrenList);
+      }
+      }
+    }
+    function makeTextField(labelText, className, value, required, placeholder) {
+      var input = document.createElement("input");
+      input.type = "text";
+      input.className = className;
+      input.maxLength = 100;
+      input.value = value;
+      input.placeholder = placeholder || "";
+      input.required = required;
+      input.autocomplete = className === "member-name" ? "name" : "off";
+      return makeControlField(labelText, input);
+    }
+    function makePhoneField(labelText, className, placeholder) {
+      var input = document.createElement("input");
+      input.type = "tel";
+      input.className = className;
+      input.inputMode = "tel";
+      input.autocomplete = "tel";
+      input.maxLength = 24;
+      input.placeholder = placeholder || "";
+      return makeControlField(labelText, input);
+    }
+    function localDateInputToday() {
+      var today = new Date();
+      var month = String(today.getMonth() + 1).padStart(2, "0");
+      var day = String(today.getDate()).padStart(2, "0");
+      return today.getFullYear() + "-" + month + "-" + day;
+    }
+    function makeSelectField(labelText, select) {
+      return makeControlField(labelText, select);
+    }
+    function makeControlField(labelText, control) {
+      var wrap = document.createElement("div");
+      var label = document.createElement("label");
+      label.textContent = labelText;
+      label.appendChild(control);
+      wrap.appendChild(label);
+      return wrap;
+    }
+    function addOption(select, value, label) {
+      var option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    }
+    function canAddPersonRow() {
+      var count = Array.prototype.filter.call(document.querySelectorAll(".person-entry"), hasPersonDetails).length;
+      if (count >= maxMembers) {
+        setStatus("form-status", "A home can include up to " + maxMembers + " people in one submission.", "error");
+        return false;
+      }
+      return true;
+    }
+    function addChildRow() {
+      if (!canAddPersonRow()) return;
+      document.getElementById("children-list").appendChild(makePersonRow("child", ""));
+      renumberPersonRows();
+      invalidateRegistrationPreview();
+      setStatus("form-status", "");
+    }
+    function addOtherRow() {
+      if (!canAddPersonRow()) return;
+      document.getElementById("other-list").appendChild(makePersonRow("other", ""));
+      renumberPersonRows();
+      invalidateRegistrationPreview();
+      setStatus("form-status", "");
+    }
+    function renumberPersonRows() {
+      Array.prototype.forEach.call(document.querySelectorAll("#children-list > .person-entry"), function (row, index) {
+        row.querySelector(".member-title strong").textContent = "Child / descendant " + (index + 1);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll("#other-list > .person-entry"), function (row, index) {
+        row.querySelector(".member-title strong").textContent = "Other household member " + (index + 1);
+      });
+    }
+    function renumberNestedChildren(list) {
+      Array.prototype.forEach.call(list.children, function (row, index) {
+        row.querySelector(".member-title strong").textContent = "Child / descendant " + (index + 1);
+      });
+    }
+    function renumberAllNestedChildren() {
+      Array.prototype.forEach.call(document.querySelectorAll(".nested-children-list"), renumberNestedChildren);
+    }
+    function collectMembers() {
+      var result = [];
+      var headRow = document.querySelector("#head-entry .person-entry");
+      var head = readPersonRow(headRow, "Head", "Head");
+      if (!head.name) throw new Error("Enter the household head or main adult's name.");
+      validateRequiredMemberFields(head);
+      head.relatedToKey = "";
+      head.relatedToName = "";
+      result.push(head);
+
+      var spouseRow = document.querySelector("#spouse-entry .person-entry");
+      if (!document.getElementById("no-spouse").checked && hasPersonDetails(spouseRow)) {
+        var spouse = readPersonRow(spouseRow, "Spouse", "Spouse");
+        if (!spouse.name) throw new Error("Enter the spouse's name or check ‘No spouse to add’." );
+        validateRequiredMemberFields(spouse);
+        spouse.relatedToKey = head.clientKey;
+        spouse.relatedToName = head.name;
+        result.push(spouse);
+      }
+      collectChildRows(document.getElementById("children-list"), head, result);
+      Array.prototype.forEach.call(document.querySelectorAll("#other-list > .person-entry"), function (row) {
+        if (!hasPersonDetails(row)) return;
+        var person = readPersonRow(row, "", "Other relative");
+        person.relationshipToRelatedMember = person.relationship;
+        if (!person.name) throw new Error("Enter a name for each person with details, or clear that row.");
+        validateRequiredMemberFields(person);
+        person.relatedToKey = head.clientKey;
+        person.relatedToName = head.name;
+        result.push(person);
+      });
+      if (result.length > maxMembers) throw new Error("A home can include up to " + maxMembers + " people in one submission.");
+      return result;
+    }
+    function hasPersonDetails(row) {
+      if (!row) return false;
+      return Array.prototype.some.call(row.querySelectorAll(":scope > .member-grid .member-name, :scope > .member-grid .member-education, :scope > .member-grid .member-occupation, :scope > .member-grid .member-phone, :scope > .member-grid .member-blood-group, :scope > .member-grid .member-dob, :scope > .member-grid .member-attendance:checked"), function (input) {
+        return String(input.value || "").trim() !== "";
+      });
+    }
+    function readPersonRow(row, fixedRelationship, directRelationship) {
+      var relationship = fixedRelationship || (row.querySelector(".member-relationship") ? row.querySelector(".member-relationship").value : "Spouse");
+      return {
+        clientKey: row.getAttribute("data-client-key"),
+        relatedToKey: "",
+        relatedToName: "",
+        name: row.querySelector(".member-name").value.trim(),
+        ageGroup: row.querySelector(".member-age-group").value,
+        relationship: relationship,
+        relationshipToRelatedMember: directRelationship || relationship,
+        education: row.querySelector(".member-education").value.trim(),
+        occupation: row.querySelector(".member-occupation").value.trim(),
+        phoneNumber: row.querySelector(".member-phone").value.trim(),
+        bloodGroup: row.querySelector(".member-blood-group").value,
+        attendance: row.querySelector(".member-attendance:checked") ? row.querySelector(".member-attendance:checked").value : "",
+        birthDate: row.querySelector(".member-dob").value
+      };
+    }
+    function validateRequiredMemberFields(person) {
+      if (!person.attendance) throw new Error("Choose Present or Absent for " + person.name + " for the family program.");
+      if (["Adult", "Child"].indexOf(person.ageGroup) === -1) throw new Error("Choose Adult or Child for " + person.name + ". This is separate from the family relationship.");
+      if (!person.education) throw new Error("Enter education / qualification for " + person.name + ".");
+      if (["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Not known"].indexOf(person.bloodGroup) === -1) {
+        throw new Error("Select a blood group for " + person.name + ". Choose ‘Not known’ if needed.");
+      }
+      var isChild = person.ageGroup === "Child";
+      if (!isChild && !person.occupation) throw new Error("Enter an occupation / job for " + person.name + ".");
+      if (!isChild && !person.phoneNumber) throw new Error("Enter a phone number for " + person.name + ".");
+      if (person.phoneNumber && !/^[+\d()\s.-]+$/.test(person.phoneNumber)) {
+        throw new Error("Enter a valid phone number for " + person.name + ".");
+      }
+      var digits = person.phoneNumber.replace(/\D/g, "");
+      if (person.phoneNumber && (digits.length < 7 || digits.length > 15)) {
+        throw new Error("Enter a phone number with 7 to 15 digits for " + person.name + ".");
+      }
+    }
+    function hasNestedFamilyDetails(childRow) {
+      var panel = childRow.querySelector(":scope > .family-editor .nested-family-panel");
+      if (!panel) return false;
+      var spouseRow = panel.querySelector(".nested-spouse-entry > .person-entry");
+      var noSpouse = panel.querySelector(".nested-no-spouse");
+      if (!(noSpouse && noSpouse.checked) && hasPersonDetails(spouseRow)) return true;
+      return Array.prototype.some.call(panel.querySelectorAll(":scope > .nested-family-section .nested-children-list > .person-entry"), function (nestedChild) {
+        return hasPersonDetails(nestedChild) || hasNestedFamilyDetails(nestedChild);
+      });
+    }
+    function collectChildRows(list, parentPerson, result) {
+      Array.prototype.forEach.call(list.children, function (row) {
+        var ownDetails = hasPersonDetails(row);
+        var familyDetails = hasNestedFamilyDetails(row);
+        if (!ownDetails) {
+          if (familyDetails) throw new Error("Enter the child's name before adding their spouse or children.");
+          return;
+        }
+        var person = readPersonRow(row, "", "Child");
+        if (!person.name) throw new Error("Enter a name for each child or descendant, or clear that row.");
+        validateRequiredMemberFields(person);
+        person.relatedToKey = parentPerson.clientKey;
+        person.relatedToName = parentPerson.name;
+        result.push(person);
+
+        var familyPanel = row.querySelector(":scope > .family-editor .nested-family-panel");
+        if (!familyPanel) return;
+        var spouseRow = familyPanel.querySelector(".nested-spouse-entry > .person-entry");
+        var noSpouse = familyPanel.querySelector(".nested-no-spouse");
+        if (!(noSpouse && noSpouse.checked) && hasPersonDetails(spouseRow)) {
+          var spouse = readPersonRow(spouseRow, "Spouse", "Spouse");
+          if (!spouse.name) throw new Error("Enter the spouse's name or choose ‘No spouse to add’.");
+          validateRequiredMemberFields(spouse);
+          spouse.relatedToKey = person.clientKey;
+          spouse.relatedToName = person.name;
+          result.push(spouse);
+        }
+        var nestedChildren = familyPanel.querySelector(":scope > .nested-family-section .nested-children-list");
+        if (nestedChildren) collectChildRows(nestedChildren, person, result);
+      });
+    }
+    function addPreviewMeta(container, labelText, value) {
+      if (!value) return;
+      var item = document.createElement("div");
+      item.className = "preview-meta-item";
+      var label = document.createElement("strong");
+      label.textContent = labelText;
+      var text = document.createElement("span");
+      text.textContent = value;
+      item.appendChild(label);
+      item.appendChild(text);
+      container.appendChild(item);
+    }
+    function formatDateOfBirth(value) {
+      if (!value) return "";
+      var parts = value.split("-").map(Number);
+      if (parts.length !== 3) return value;
+      return new Date(parts[0], parts[1] - 1, parts[2]).toLocaleDateString("en-US", {
+        month: "long", day: "numeric", year: "numeric"
+      });
+    }
+    function familyDisplayName(person) {
+      var directRelationship = person.relationshipToRelatedMember || person.relationship || "Relative";
+      if (!person.relatedToName) return person.name + " (household head)";
+      return person.name + " (" + person.relatedToName + " " + directRelationship.toLowerCase() + ")";
+    }
+    function renderRegistrationPreview(members) {
+      var content = document.getElementById("preview-content");
+      content.replaceChildren();
+      var meta = document.createElement("div");
+      meta.className = "preview-meta";
+      addPreviewMeta(meta, "Branch", branchNameInEnglish(selectedBranch));
+      addPreviewMeta(meta, "Home", isNewHousehold ? document.getElementById("new-home-name").value.trim() : selectedHome.name);
+      if (isNewHousehold) {
+        addPreviewMeta(meta, "Connected through", document.getElementById("connects-through").value.trim());
+        var parentSelect = document.getElementById("parent-home");
+        if (parentSelect.value) addPreviewMeta(meta, "Parent home", parentSelect.options[parentSelect.selectedIndex].text);
+      }
+      addPreviewMeta(meta, "Household contact phone", document.getElementById("contact-phone").value.trim());
+      var presentCount = members.filter(function (person) { return person.attendance === "Present"; }).length;
+      var absentCount = members.length - presentCount;
+      addPreviewMeta(meta, "Program attendance", presentCount + " Present · " + absentCount + " Absent");
+      content.appendChild(meta);
+
+      var heading = document.createElement("h4");
+      heading.textContent = "People in this home · " + members.length;
+      content.appendChild(heading);
+      var list = document.createElement("div");
+      list.className = "preview-people";
+      members.forEach(function (person) {
+        var card = document.createElement("article");
+        card.className = "preview-person";
+        var title = document.createElement("div");
+        title.className = "preview-person-heading";
+        var name = document.createElement("strong");
+        name.textContent = familyDisplayName(person);
+        var tags = document.createElement("div");
+        tags.className = "preview-person-tags";
+        var role = document.createElement("span");
+        role.className = "preview-role";
+        role.textContent = person.relationshipToRelatedMember === "Head"
+          ? "Household head"
+          : person.relationshipToRelatedMember;
+        var attendance = document.createElement("span");
+        attendance.className = "preview-attendance " + person.attendance.toLowerCase();
+        attendance.textContent = person.attendance;
+        tags.appendChild(role);
+        var ageGroup = document.createElement("span");
+        ageGroup.className = "preview-age-group";
+        ageGroup.textContent = person.ageGroup;
+        tags.appendChild(ageGroup);
+        tags.appendChild(attendance);
+        title.appendChild(name);
+        title.appendChild(tags);
+        card.appendChild(title);
+        var details = [];
+        if (person.education) details.push("Education / qualification: " + person.education);
+        if (person.occupation) details.push("Occupation / job: " + person.occupation);
+        if (person.phoneNumber) details.push("Phone number: " + person.phoneNumber);
+        details.push("Blood group: " + person.bloodGroup);
+        if (person.birthDate) details.push("Date of birth: " + formatDateOfBirth(person.birthDate));
+        var detailLine = document.createElement("p");
+        detailLine.className = "preview-person-details";
+        detailLine.textContent = details.length ? details.join(" · ") : "No additional details entered";
+        card.appendChild(detailLine);
+        list.appendChild(card);
+      });
+      content.appendChild(list);
+    }
+    function resetRegistrationPreview() {
+      previewReady = false;
+      document.getElementById("registration-preview").hidden = true;
+      document.getElementById("preview-content").replaceChildren();
+      document.getElementById("preview-button").hidden = false;
+      document.getElementById("submit-button").hidden = true;
+      document.getElementById("submit-button").disabled = false;
+      document.getElementById("submit-button").textContent = "Confirm and send for review";
+    }
+    function invalidateRegistrationPreview() {
+      if (!previewReady) return;
+      resetRegistrationPreview();
+      setStatus("form-status", "Your details changed. Preview them again before confirming.");
+    }
+    function previewRegistration() {
+      var controls = document.getElementById("registration-form").querySelectorAll("input, select");
+      for (var i = 0; i < controls.length; i++) {
+        if (controls[i].id === "consent") continue;
+        if (!controls[i].checkValidity()) {
+          controls[i].reportValidity();
+          return;
+        }
+      }
+      var members;
+      try {
+        members = collectMembers();
+      } catch (error) {
+        setStatus("form-status", error.message || "Check the person details and try again.", "error");
+        return;
+      }
+      renderRegistrationPreview(members);
+      previewReady = true;
+      document.getElementById("registration-preview").hidden = false;
+      document.getElementById("preview-button").hidden = true;
+      document.getElementById("submit-button").hidden = false;
+      setStatus("form-status", "Review the output below. Edit any details that need a change.");
+      document.getElementById("registration-preview").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function editRegistration() {
+      resetRegistrationPreview();
+      setStatus("form-status", "Edit the details, then preview them again.");
+      document.getElementById("registration-heading").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function submitRegistration(event) {
+      event.preventDefault();
+      var form = document.getElementById("registration-form");
+      if (!previewReady) {
+        setStatus("form-status", "Preview the registration details before sending them.", "error");
+        return;
+      }
+      if (!form.reportValidity()) return;
+      if (isNewHousehold && !document.getElementById("connects-through").value.trim()) {
+        setStatus("form-status", "Enter the relative this new home connects through.", "error");
+        return;
+      }
+      var members;
+      try {
+        members = collectMembers();
+      } catch (error) {
+        setStatus("form-status", error.message || "Check the person details and try again.", "error");
+        return;
+      }
+      var button = document.getElementById("submit-button");
+      button.disabled = true;
+      button.textContent = "Sending…";
+      setStatus("form-status", "Sending your registration for family coordinator review…");
+      var payload = {
+        requestKey: currentRequestKey,
+        branchId: selectedBranch.id,
+        newHousehold: isNewHousehold,
+        householdId: isNewHousehold ? "" : selectedHome.id,
+        householdName: isNewHousehold ? document.getElementById("new-home-name").value : "",
+        connectedThrough: isNewHousehold ? document.getElementById("connects-through").value : "",
+        parentHouseholdId: isNewHousehold ? document.getElementById("parent-home").value : "",
+        contactPhone: document.getElementById("contact-phone").value,
+        consent: document.getElementById("consent").checked,
+        members: members
+      };
+      callRegistrationServer("submitRegistration", payload, function (result) {
+          button.disabled = false;
+          button.textContent = "Confirm and send for review";
+          if (!result || !result.ok) {
+            setStatus("form-status", result && result.message ? result.message : "We could not save the registration.", "error");
+            return;
+          }
+          setStatus("form-status",
+            "Registration received for review. Reference: " + result.reference +
+            ". The family coordinator will check it before marking the home complete.",
+            "success");
+          button.disabled = true;
+          currentRequestKey = makeRequestKey();
+        }, function () {
+          button.disabled = false;
+          button.textContent = "Confirm and send for review";
+          setStatus("form-status", "Could not reach the registration system. Check your connection and retry; repeat submissions are protected.", "error");
+        });
+    }
+    document.getElementById("retry-load").addEventListener("click", loadRegistration);
+    document.getElementById("back-branches").addEventListener("click", function () {
+      if (window.history.state && window.history.state.nkFamilyRegistrationPage === "home") window.history.back();
+      else showFlowPage("branch");
+    });
+    document.getElementById("request-home").addEventListener("click", requestNewHome);
+    document.getElementById("back-homes").addEventListener("click", function () {
+      if (window.history.state && window.history.state.nkFamilyRegistrationPage === "registration") window.history.back();
+      else showFlowPage("home");
+    });
+    document.getElementById("no-spouse").addEventListener("change", function () {
+      var spouseEntry = document.getElementById("spouse-entry");
+      spouseEntry.hidden = this.checked;
+      if (this.checked) {
+        clearPersonInputs(spouseEntry);
+      }
+      invalidateRegistrationPreview();
+    });
+    document.getElementById("add-child").addEventListener("click", addChildRow);
+    document.getElementById("add-other").addEventListener("click", addOtherRow);
+    document.getElementById("preview-button").addEventListener("click", previewRegistration);
+    document.getElementById("edit-registration").addEventListener("click", editRegistration);
+    var registrationForm = document.getElementById("registration-form");
+    registrationForm.addEventListener("input", function (event) {
+      if (event.target.id !== "consent") invalidateRegistrationPreview();
+    });
+    registrationForm.addEventListener("change", function (event) {
+      if (event.target.id !== "consent") invalidateRegistrationPreview();
+    });
+    registrationForm.addEventListener("submit", submitRegistration);
+
+    if (window.location.protocol === "file:") {
+      setStatus("loading-status", "Local preview only. Open Prototype.html for the interactive demo; deploy this Apps Script web app to save registrations.");
+    } else {
+      loadRegistration();
+    }
+  </script>
+</body>
+</html>
