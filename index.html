@@ -371,9 +371,9 @@
     }
     function getNetlifyApiUrl(api) {
       var host = String(window.location.hostname || "").toLowerCase();
-      var base = host === "nkfamilyregistration.netlify.app" || host.endsWith(".netlify.app")
+      var base = host === "nkdataregistration.netlify.app" || host.endsWith(".netlify.app")
         ? "/.netlify/functions/nk-registration"
-        : "https://nkfamilyregistration.netlify.app/.netlify/functions/nk-registration";
+        : "https://nkdataregistration.netlify.app/.netlify/functions/nk-registration";
       return base + "?api=" + encodeURIComponent(api);
     }
     function callRegistrationServer(method, payload, onSuccess, onFailure) {
